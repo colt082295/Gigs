@@ -1,0 +1,52 @@
+<template name="viewYourWork">
+    
+    
+<head>
+    <title>View Your Gigs</title>
+</head>
+
+<body>
+  
+  {{> nav}}  
+  
+  
+  <div class="view_work_wrapper row">
+    
+    <div class="small-12 columns work_wrapper">
+      
+      {{#each profile.work}}
+      
+        <div class="work">
+          
+          <a href="" class="">
+            
+            <h1 class="title">{{title_gig}}</h1>
+            
+            <p class="descprion">{{{description_gig}}}</p>
+            
+          </a>
+        
+        </div>
+      
+      {{/each}}
+    
+    </div>
+    
+    
+  
+    
+  </div>
+
+  
+  
+  
+  
+  
+
+  
+</body>
+    
+    
+    
+    
+</template>

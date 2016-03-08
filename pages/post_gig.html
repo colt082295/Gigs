@@ -1,0 +1,59 @@
+<template name="postGig">
+    
+
+
+  
+  {{> nav}}  
+  
+  
+  <form class="post_gig" id="validation-example">
+        <div class="row">
+          <div class="medium-12 columns">
+            <input type="text" name="title" class="required" id="title" placeholder="Enter the title">
+          </div>
+          <div class="medium-12 columns">
+              <textarea id="edit" name="content"></textarea>
+          </div>
+          <div class="medium-12 columns">
+            <label>Enter Price
+              <input type="text" name="price" id="price" placeholder=""> <!-- Will have to add option for different currencies from other countries -->
+            </label>
+          </div>
+          <div class="medium-12 columns">
+              <label>Choose a category this fits into <a href="">Want one added?</a>
+                <select id="category"> 
+                
+                {{#each category}}
+                
+                <option value="{{catgeory}}">{{catgeory}}</option>
+                
+                {{/each}}
+                </select>
+              </label>
+          </div>
+          <div class="medium-12 columns">
+            <div class="tags"></div>
+            <label>Enter Tags. End a tag by pressing enter.
+              <input type="text" name="tag_box" id="tag_box" placeholder="">
+            </label>
+          </div>
+          <div class="medium-12 columns">
+            <a type="submit" class="submit expanded button" href="#">Post Gig</a>
+          <a class="remove expanded button" href="#">Remove Gigs</a>
+          <a id="remove_users" class="expanded button" href="#">Remove Users</a>
+          </div>
+        </div>
+      </form>
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+    
+    
+</template>

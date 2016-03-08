@@ -1,0 +1,269 @@
+<template name="viewGig">
+    
+    
+<head>
+    <title>View a Gig</title>
+</head>
+
+<body>
+  
+  {{> nav}}  
+  
+  
+  <div class="view_gig_wrapper row align-top">
+    
+    <div class="small-12 medium-7 large-8 columns">
+      
+    <h1 class="gig_title">{{> froalaReactive getFEContext}}</h1>
+    
+    
+    </div>
+    
+    <div class="small-12 medium-4 large-3 medium-offset-1 large-offset-1 columns">
+      {{#if currentUser}}
+      
+      {{#if equals currentUser.username user}}
+      
+      {{#if probation_time}}
+      
+      <a class="expanded button submit center-abs" id="review-submissions" href="#" data-open="exampleModal4">Review Submissions</a>
+      
+      {{else}}
+      
+      <a class="expanded button alert submit center-abs" id="remove-gig" href="#">Remove Gig</a> <!-- You can only remove the gig when it has no submissions. -->
+      
+      {{/if}}
+      
+      
+      
+      {{else}}
+      
+        {{#if probation_time}}
+        
+        {{#if alreadySubmitted}}
+        <a class="expanded button alert submit center-abs" href="#" data-open="exampleModal3">Submit Work</a>
+        {{else}}
+        <h4 class="center-abs">You already submitted</h4>
+        
+        {{/if}}
+        
+        {{else}}
+        
+        {{#if alreadySubmitted}}
+        <a class="expanded button submit center-abs" href="#" data-open="exampleModal2">Submit Work</a>
+        
+        {{else}}
+        <h4 class="center-abs">You already submitted</h4>
+        {{/if}}
+        {{/if}}
+      
+      
+      {{/if}}
+      
+      
+      {{else}}
+      
+      <a href="{{pathFor 'login'}}" class="expanded button submit center-abs">Login to submit your work.</a>
+      
+      {{/if}}
+      
+    
+    </div>
+    
+    <div class="small-12 medium-7 large-8 columns info float-left">
+      
+      <p class="gig_description">{{> froalaReactive getFEContext2}}</p>
+      
+    </div>
+    
+    <div class="small-12 medium-4 large-3 medium-offset-1 large-offset-1 columns sidebar {{#if probation}}probation{{/if}}">
+      
+      <div class="padding">
+        
+        <h2 class="price">${{price}}</h2>
+        
+        <p>Posted at {{time}} on {{date}} by <a href="{{pathFor 'viewUser' username = user}}" class="user">{{user}}</a></p>
+        
+        <p>Time Since Posted: {{timeFrom.days}} Days {{timeFrom.hours}} Hours {{timeFrom.minutes}} Minutes {{timeFrom.seconds}} Seconds</p> <!-- If possible, make this a timer counting up while on the page. -->
+        
+        
+        
+        {{#if probation_time}}  
+        
+        <p>Time since first submission: {{timeFromProbation}}</p> 
+        
+        <p>Gig expires at: {{expireAt}}</p>
+        
+        {{/if}}
+        
+        <p class="category"><span class="title">Category:</span><a href="{{pathFor 'viewCategory' category = category}}">{{category}}</a></p>
+      
+      </div>
+      <div class="padding">
+    
+        <div class="tag_wrapper">
+          {{#each tags}}
+          
+            <a href="{{pathFor 'viewTag' tag = this}}" class="tag">{{this}}</a>
+          
+          {{/each}}
+        </div>
+      
+      </div>
+      
+      {{#if probation_time}}
+      
+      
+        <div class="submitters_wrapper">
+          <p>Submissions: {{countSubmissions}}</p>
+        {{#each submitters}}
+        
+          <a href="{{pathFor 'viewUser' username = this}}" class="submitter">
+            
+            {{this}}
+            
+          </a>
+        
+        {{/each}}
+        
+        </div>
+      
+      {{/if}}
+      
+      
+    
+    </div>
+    
+    
+  
+    
+  </div>
+
+  
+  {{#if probation_time}}
+      
+      
+      <div class="reveal" id="exampleModal3" data-reveal>
+    
+    
+    
+    <form class="gig">
+        <div class="row">
+          <div class="medium-12 columns">
+            <label>Submission Title
+              <input type="text" name="title" id="title-probation" placeholder="Enter Title">
+            </label>
+          </div>
+          <div class="medium-12 columns">
+              <div id="summernote-probation">Enter your submission description here.</div>
+          </div>
+          <div class="medium-12 columns">
+          <a type="submit" id="submit-work-probation" class="expanded button" href="#">Submit</a>
+          </div>
+        </div>
+      </form>
+      
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+        
+    </div>
+      
+      {{else}}
+      
+        <div class="reveal" id="exampleModal2" data-reveal>
+    
+    
+    
+    <form class="gig">
+        <div class="row">
+          <div class="medium-12 columns">
+            <label>Submission Title
+              <input type="text" name="title" id="title" placeholder="Enter Title">
+            </label>
+          </div>
+          <div class="medium-12 columns">
+              <div id="summernote">Enter your submission description here.</div>
+          </div>
+          <div class="medium-12 columns">
+          <a type="submit" id="submit-work" class="expanded button" href="#">Submit</a>
+          </div>
+        </div>
+      </form>
+      
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+        
+    </div>
+      
+      {{/if}}
+  
+  
+  
+  {{#if equals currentUser.username user}}
+  
+  
+      <div class="reveal" id="exampleModal4" data-reveal>
+    
+    
+    
+    <form class="gig">
+        <div class="row">
+          <div class="medium-12 columns">
+            <h2>Submission {{gigSubmissionIndex}} of {{gigSubmissionLength}}</h2>
+              <h1>{{gigSubmission.title}}</h1>
+          </div>
+          <div class="medium-12 columns">
+              <div class="submission_description">{{{gigSubmission.description}}}</div>
+          </div>
+          <div class="medium-12 columns">
+            <p>By <a href="{{pathFor 'viewUser' username = gigSubmission.user}}">{{gigSubmission.user}}</a></p>
+          </div>
+          <div class="medium-12 columns">
+            
+            
+            <div class="expanded button-group">
+              <a id="right-submission" class="button">Right</a>
+              <a id="wrong-submission" class="button alert">Wrong</a>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+        
+    </div>
+  
+  
+  {{/if}}
+    
+    
+    
+  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   
+  
+
+  
+</body>
+    
+    
+    
+    
+</template>

@@ -1,0 +1,41 @@
+<template name="search">
+    
+    
+<head>
+    <title>Search</title>
+</head>
+
+<body>
+  
+  {{> nav}}  
+  
+<div class="small-12 medium-3 large-2 columns">
+  
+  <div class="category_wrapper">
+    
+    {{#each categories}}
+    
+      <a href="{{pathFor 'viewCategory' category = catgeory}}">{{catgeory}}</a>
+    
+    {{/each}}
+  
+  </div>
+  
+  </div>
+  
+  
+  <div class="small-12 medium-8 large-9 columns">
+{{> searchBox}}
+  
+  </div>
+  
+  
+  
+
+  
+</body>
+    
+    
+    
+    
+</template>

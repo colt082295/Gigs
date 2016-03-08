@@ -1,0 +1,54 @@
+<template name="viewYourGigs">
+    
+    
+<head>
+    <title>View Your Gigs</title>
+</head>
+
+<body>
+  
+  {{> nav}}  
+  
+  
+  <div class="view_gigs_wrapper row">
+    
+    <div class="small-12 columns gigs_wrapper">
+      
+      {{#each gigs}}
+      
+        <div class="gig">
+          
+          <a href="{{pathFor 'viewGig'}}" class="">
+            
+            <h1 class="title">{{title}}</h1>
+            
+            <p class="descprion">{{{description}}}</p>
+            
+            <p class="price">{{price}}</p>
+            
+          </a>
+        
+        </div>
+      
+      {{/each}}
+    
+    </div>
+    
+    
+  
+    
+  </div>
+
+  
+  
+  
+  
+  
+
+  
+</body>
+    
+    
+    
+    
+</template>

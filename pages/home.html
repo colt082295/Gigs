@@ -1,0 +1,147 @@
+<template name="home">
+    
+    
+<head>
+    <title>gig</title>
+</head>
+
+<body>
+  
+  {{> nav}} 
+  
+  {{#if currentUser}}
+        
+        <div class="banner row">
+        
+        <div class="medium-8 small-9 large-6 absolute-center">
+              <input type="text" name="home_search_gig" id="home_search_gig" placeholder="Search For Gigs">
+          </div>
+        
+    </div>
+    
+    <div class="slider1 row">
+        
+        
+        {{#each gigs}}
+        
+        <div class="home_gig_wrapper">
+            <a class="home_gig_link" href="{{pathFor 'viewGig'}}">
+                <div class="home_gig">
+                
+                <h3>{{title}}</h3>
+                <div class="gig_description">{{{description}}}</div>
+                
+                </div>
+                
+            </a>
+        </div>
+        
+        {{/each}}
+        
+        
+    </div>
+    
+    <!-- Only display this if no user is logged in -->
+    <div class="category-chooser">
+        
+        <div class="left">
+            
+            <a href="#category-1"></a>
+            <a href="#category-2"></a>
+            
+        </div>
+        
+        <div class="right">
+            
+            <a href="#">
+                
+                <h2>Job Title</h2>
+                
+                <p>Jobs description</p>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+        
+        
+        
+        
+        
+    {{else}}
+        
+        <div class="banner row">
+        
+        <div class="medium-8 small-9 large-6 absolute-center">
+              <input type="text" name="home_search_gig" id="home_search_gig" placeholder="Search For Gigs">
+          </div>
+        
+    </div>
+    
+    <h1>{{currentUser.username}}</h1>
+    
+    <div class="slider1 row">
+        
+        
+        {{#each gigs}}
+        
+        <div class="home_gig_wrapper">
+            <a class="home_gig_link" href="{{pathFor 'viewGig'}}">
+                <div class="home_gig">
+                
+                <h3>{{title}}</h3>
+                <div class="gig_description">{{{description}}}</div>
+                
+                </div>
+                
+            </a>
+        </div>
+        
+        {{/each}}
+        
+        
+    </div>
+    
+    <!-- Only display this if no user is logged in -->
+    <div class="category-chooser">
+        
+        <div class="left">
+            
+            <a href="#category-1"></a>
+            <a href="#category-2"></a>
+            
+        </div>
+        
+        <div class="right">
+            
+            <a href="#">
+                
+                <h2>Job Title</h2>
+                
+                <p>Jobs description</p>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+        
+        
+        
+        
+        
+        
+        
+        
+  {{/if}}
+  
+    
+    
+  
+</body>
+    
+    
+    
+    
+</template>

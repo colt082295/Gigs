@@ -1,0 +1,231 @@
+<template name="viewUser">
+    
+    
+<head>
+    <title>View a Gig</title>
+</head>
+
+<body>
+  
+  {{> nav}}  
+  
+  
+  <div class="view_user_wrapper row align-top">
+    
+    <div class="small-12 medium-3 large-2 sidebar columns">
+      
+      <div class="padding">
+        
+      <div class="user_pic_wrapper">
+        
+        <div class="user-pic">
+          
+          
+          
+        </div>
+      
+      </div>
+      
+      {{username}}
+      
+      <div class="rep_box_wrapper">
+        
+        <div class="rep-box">
+          
+          <div class="site-rep">
+            
+            <div class="title">
+              
+              Site Reputation:
+              
+            </div>
+            
+            <div class="info">
+              
+              100
+              
+            </div>
+            
+          </div>
+        
+        </div>
+        
+        <div class="rep-box">
+        
+          <div class="community-rep">
+            
+            <div class="title">
+              
+              Community Reputation:
+              
+            </div>
+            
+            <div class="info">
+              
+              100
+              
+            </div>
+            
+          </div>
+        
+        </div>
+        
+      </div>
+      
+      </div>
+      
+      <a class="button alert submit" id="report-user" href="#">Report User</a>
+      
+    </div>
+    
+    <div class="small-12 medium-9 large-10 columns right">
+    
+    <div class="block_wrapper">
+    
+    <div class="block">
+      
+      <div class="title">
+        {{profile.gigsPosted}}
+      </div>
+      
+      <div class="info">
+        Gigs Posted
+      </div>
+      
+    </div>
+    
+    <div class="block">
+      
+      <div class="title">
+        {{profile.submissions.first}}
+      </div>
+      
+      <div class="info">
+        1st Submissions
+      </div>
+      
+    </div>
+    
+    <div class="block">
+      
+      <div class="title">
+        {{profile.submissions.first_accepted}} {{percent profile.submissions.first_accepted profile.submissions.first}}%
+      </div>
+      
+      <div class="info">
+        1st Gig Acceptions
+      </div>
+      
+    </div>
+    
+    <div class="block">
+      
+      <div class="title">
+        {{profile.submissions.all_accepted}}
+      </div>
+      
+      <div class="info">
+        Accepted Submissions
+      </div>
+      
+    </div>
+    
+    <div class="block">
+      
+      <div class="title">
+        {{profile.submissions.all}}
+      </div>
+      
+      <div class="info">
+        Total Submissions
+      </div>
+      
+    </div>
+    
+    </div>
+    
+    
+    <div class="user_gigs_wrapper">
+      
+      
+    
+      
+      <ul class="tabs" data-tabs id="example-tabs">
+        <div class="tabs_container expanded button-group">
+          <li class="tabs-title button is-active"><a href="#panel1" aria-selected="true">Active Gigs</a></li>
+          <li class="tabs-title button"><a href="#panel2">Submissions</a></li>
+        </div>
+      </ul>
+      
+      
+      <div class="tabs-panel is-active" id="panel1">
+          
+          {{#each gigsActive}}
+          
+            <div class="gig cut-off">
+                
+                <h3 class="title">{{title}}</h3>
+                
+                <p class="description">{{{description}}}</p>
+                
+                <p class="price">{{price}}</p>
+                
+            
+            </div>
+          
+          {{else}}
+          
+            <h3>It looks like {{username}} has not active gigs posted.</h3>
+          
+          {{/each}}
+          
+          
+          
+      </div>
+      <div class="tabs-panel" id="panel2">
+        
+        
+        <h3>Recent Submissions</h3>
+      
+        {{#each profile.work}}
+        
+          
+          <div class="gig cut-off">
+          
+                
+                <h3 class="title">{{title}}</h3>
+                
+                <p class="description">{{{description}}}</p>
+                
+                Posted by: <a href="{{pathFor 'viewUser' username = user}}">{{user}}</a>
+                
+            
+            </div>
+        
+        
+        {{/each}}
+        
+        
+      </div>
+      
+    
+      
+    </div>
+    
+    </div>
+  
+    
+  </div>
+  
+  
+  
+  
+  
+
+  
+</body>
+    
+    
+    
+    
+</template>

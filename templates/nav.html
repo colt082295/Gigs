@@ -1,0 +1,140 @@
+<template name="nav">
+<nav class="title-bar" data-responsive-toggle="top-bar-menu" data-hide-for="medium">
+  <div class="title-bar-left">
+    <a href="{{pathFor 'home'}}"><img src="http://placehold.it/150x48&text=logo" alt="Logo"></a>
+  </div>
+
+  <div class="title-bar-right">
+    <button class="menu-icon" type="button" data-toggle></button>
+  </div>
+</nav>
+
+<nav class="top-bar" id="top-bar-menu">
+  <div class="row">
+    <div class="top-bar-left show-for-medium">
+      <ul class="menu menu-items">
+        <li><a href="{{pathFor 'home'}}"><img src="http://placehold.it/150x48&text=logo" alt="logo"></a></li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="vertical medium-horizontal menu menu-items" data-responsive-menu="drilldown medium-dropdown">
+        <li>
+          <a href="{{pathFor 'viewGigs'}}">Gigs</a>
+          <ul class="menu vertical ">
+            <li>
+              <a href="#">Catgeories</a>
+              <ul class="menu vertical ">
+                {{#each categories}}
+                
+                  <li><a href="{{pathFor 'viewCategory' category = catgeory}}">{{catgeory}}</a></li>
+                
+                {{/each}}
+              </ul>
+            </li>
+            <li><a href="#">Recently Posted</a></li>
+            <li><a href="#">Recomended For You</a></li>
+          </ul>
+        </li>
+        
+        {{#if currentUser}}
+          
+          <li id="downloads-tab" class=""><a href="{{pathFor 'postGig'}}">Post Gig</a></li>
+          <li id="downloads-tab" class=""><a href="{{pathFor 'viewYourWork'}}">Your Work</a></li>
+          <li id="downloads-tab" class=""><a href="{{pathFor 'viewYourGigs'}}">Your Gigs</a></li>
+          <li id="downloads-tab" class=""><a href="{{pathFor 'search'}}">Search</a></li>
+          <li id="logout" class=""><a href="#">Logout</a></li>
+          <a href="{{pathFor 'viewUser' username = currentUser.username}}" class="user">
+            
+            {{currentUser.username}}
+            
+          </a>
+          
+          {{else}}
+          
+          <li id="login" class=""><a href="{{pathFor 'login'}}">Login</a></li>
+          <li id="register" class=""><a href="{{pathFor 'register'}}">Register</a></li>
+        
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+</template>
+
+<template name="searchBox">
+    {{> EasySearch.Input index=playersIndex  }}
+
+
+ {{#EasySearch.IfInputEmpty index=playersIndex }}
+    <div class="padded examples">Nothing searched for yet.</div>
+  {{else}}
+    
+    <ul>
+        {{#EasySearch.Each index=playersIndex }}
+            <li>
+              
+              <a href="">
+                <h3>{{title}}</h3>
+                <p>{{{description}}}</p>
+              </a>
+            
+            </li>
+            
+            {{else}}
+            <h3>Sorry, nothing.</h3>
+        {{/EasySearch.Each}}
+    </ul>
+    
+    
+  {{/EasySearch.IfInputEmpty}}
+
+
+
+
+
+
+
+    
+</template>
+
+
+
+
+
+<template name="searchResult">
+  
+  <input class="form-control typeahead" type="text" id="search-box"/>
+  
+  {{#each getPackages}}
+<div class="package">
+  <h4 class="name">
+    <a href="{{git}}" target="_blank">{{{title}}}</a>
+  </h4>
+  <div class="description">
+    {{{description}}}
+  </div>
+</div>
+{{/each}}
+  
+  
+</template>
+
+
+<template name="searchFull">
+  
+  <input class="form-control typeahead" type="text" id="search"/>
+  
+  {{#each searchResults}}
+  
+  <h4>{{this.title}}</h4>
+  
+  
+  {{else}}
+  
+    <h4>Couldn't find anything.</h4>
+  
+  {{/each}}
+  
+</template>
